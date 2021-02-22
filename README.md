@@ -1,6 +1,8 @@
 # week3
 
-A new Flutter project.
+A new Flutter project :
+
+![plot](./images/Screenshot.png)
 
 ## Getting Started
 
