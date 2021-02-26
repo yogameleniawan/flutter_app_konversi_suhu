@@ -13,10 +13,10 @@ class Input extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: etCelcius,
-      decoration: const InputDecoration(hintText: "Masukan Suhu dalam Celcius"),
+      decoration: InputDecoration(hintText: "Masukan Suhu dalam Celcius"),
       keyboardType: TextInputType.number,
       inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
       ],
     );
   }

@@ -22,7 +22,7 @@ class Result extends StatelessWidget {
           children: <Widget>[
             Text("Suhu dalam Kelvin"),
             Text(
-              _kelvin.toStringAsFixed(0),
+              _kelvin.toStringAsFixed(2),
               style: TextStyle(height: 1.5, fontSize: 40),
             )
           ],
@@ -31,7 +31,7 @@ class Result extends StatelessWidget {
           children: <Widget>[
             Text("Suhu dalam Reamor"),
             Text(
-              _reamor.toStringAsFixed(0),
+              _reamor.toStringAsFixed(2),
               style: TextStyle(height: 1.5, fontSize: 40),
             )
           ],
