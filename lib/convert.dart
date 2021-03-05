@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class Convert extends StatelessWidget {
-  final Function konvertHandler;
+  Function konvertHandler;
   Convert({Key key, @required this.konvertHandler});
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,10 @@ class Convert extends StatelessWidget {
         onPressed: konvertHandler,
         color: Colors.blueAccent,
         textColor: Colors.white,
-        child: Text("Konversi Suhu"),
+        child: Text(
+          "Konversi Suhu",
+          style: TextStyle(fontSize: 20),
+        ),
       ),
     );
   }

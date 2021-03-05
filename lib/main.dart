@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/rendering/box.dart';
 import 'input.dart';
 import 'result.dart';
 import 'convert.dart';
+import 'riwayat.dart';
+import 'dropdown.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,20 +19,40 @@ class _MyAppState extends State<MyApp> {
   TextEditingController etCelcius = new TextEditingController();
 
   double nCelcius = 0;
-  double _kelvin = 0;
-  double _reamor = 0;
+  var listItem = ["Kelvin", "Reamur"];
+  String _newValue = "Kelvin";
+  double _result = 0;
+  List<String> listViewItem = [];
+
   void _konversiSuhu() {
     setState(() {
       nCelcius = double.parse(etCelcius.text);
-      _kelvin = nCelcius + 273;
-      _reamor = (4 / 5) * nCelcius;
+      if (_newValue == "Kelvin")
+        _result = nCelcius + 273;
+      else
+        _result = (4 / 5) * nCelcius;
+      addItemToList();
+    });
+  }
+
+  void addItemToList() {
+    setState(() {
+      String value = _newValue + " : " + _result.toStringAsFixed(1);
+      listViewItem.insert(0, value);
+    });
+  }
+
+  void dropdownOnChanged(String changeValue) {
+    setState(() {
+      _newValue = changeValue;
+      _konversiSuhu();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -47,8 +67,20 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Input(etCelcius: etCelcius),
-              Result(kelvin: _kelvin, reamor: _reamor),
+              DropdownKonversi(
+                  listItem: listItem,
+                  newValue: _newValue,
+                  dropdownOnChanged: dropdownOnChanged),
+              Result(result: _result),
               Convert(konvertHandler: _konversiSuhu),
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                child: Text(
+                  "Riwayat Konversi",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Expanded(child: RiwayatKonversi(listViewItem: listViewItem))
             ],
           ),
         ),
